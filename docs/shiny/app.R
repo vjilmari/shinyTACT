@@ -84,17 +84,17 @@ server <- function(input, output, session) {
   })
   
   output$tactPlot <- renderPlot({
-    # Tässä voit käyttää input$x_label ja input$y_label X- ja Y-akselin nimenä
+    # Use the chosen labels if given
     x_label <- input$x_label
     y_label <- input$y_label
     
-    # Säädä fonttikokoa
+    # Set font size
     par(cex.lab = input$font_size, cex.axis = input$font_size, cex.main = input$font_size,
         mar = c(5, 5, 4, 2) + 0.1)
     
-    # Kutsutaan TACT_fin-funktiota annetulla korrelaatiolla (r) ja muuttujien nimillä
+    # Call TACT_fin function with 
     plot <- TACT_fin(r = input$r, distribution = "normal",
-                     Xlab = bquote(bold(.(x_label))),  # Lihavointi bquote(bold()) avulla
+                     Xlab = bquote(bold(.(x_label))),  # Bold face axis labels
                      Ylab = bquote(bold(.(y_label))),
                      font_size = input$font_size,
                      language=selected_language())
