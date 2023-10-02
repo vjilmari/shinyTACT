@@ -14,7 +14,7 @@ TACT_en<-
     high="high",
     correlation="Correlation",
     match_1="% of low, medium and high values match.\n",
-    match_2="With random-guess this percentage would be 33.3%")
+    match_2="With no correlation, this percentage would be 33.3%")
 
 TACT_ge <- c(
   language = "ge",
