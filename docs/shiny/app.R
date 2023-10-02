@@ -40,7 +40,7 @@ ui <- fluidPage(
       textInput("x_label", textOutput("x_label_text"), value = "X"),
       textInput("y_label", textOutput("y_label_text"), value = "Y"),
       sliderInput("font_size", textOutput("font_size_text"), min = 0.1, max = 3, value = 1, step = 0.1),
-      tags$p("Lisätietoa Trisect and Cross-Tabulate (TACT) -menetelmästä:",
+      tags$p(textOutput("tact_info_text"),
              tags$br(),
              tags$a("Mõttus, R. (2022). What Correlations Mean for Individual People: A Tutorial for Researchers, Students and the Public. Personality Science, 3, 1–27. https://doi.org/10.5964/ps.7467",
                     href = "https://doi.org/10.5964/ps.7467",
@@ -77,6 +77,10 @@ server <- function(input, output, session) {
   
   output$font_size_text <- renderText({
     translations[[selected_language()]]$font_prompt
+  })
+  
+  output$tact_info_text <- renderText({
+    translations[[selected_language()]]$tact_paper_prompt
   })
   
   output$tactPlot <- renderPlot({
