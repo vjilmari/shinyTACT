@@ -8,11 +8,22 @@ source("TACT_languages.R")
 # import languages
 translations <- list(
   fi = fromJSON("fi.json"),
-  en = fromJSON("en.json")
+  en = fromJSON("en.json"),
+  ge = fromJSON("ge.json"),
+  es = fromJSON("es.json")
 )
 
+
 ui <- fluidPage(
-  selectInput("language", "Kieli/Language:", choices = c("fi", "en"), selected="fi"),
+  selectInput("language", "Language:", 
+              choices = c(
+                "Suomi" = "fi",
+                "English" = "en",
+                "Deutsch" = "ge",
+                "Eesti keel" = "es"
+              ),
+              selected = "fi"
+  ),
   uiOutput("title_panel"),
   tags$style(HTML("
     .sidebar {

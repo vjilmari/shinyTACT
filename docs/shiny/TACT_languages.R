@@ -16,7 +16,28 @@ TACT_en<-
     match_1="% of low, medium and high values match.\n",
     match_2="With random-guess this percentage would be 33.3%")
 
+TACT_ge <- c(
+  language = "ge",
+  low = "niedrig",
+  medium = "mittel",
+  high = "hoch",
+  correlation = "Korrelation",
+  match_1 = "% der niedrigen, mittleren und hohen Werte stimmen überein.\n",
+  match_2 = "Mit einer Zufallsguessing wäre dieser Prozentsatz 33.3%."
+)
+
+TACT_es <- c(
+  language = "es",
+  low = "madal",
+  medium = "keskmine",
+  high = "kõrge",
+  correlation = "Korrelatsioon",
+  match_1 = "% madalatest, keskmistest ja kõrgetest väärtustest kattuvad.\n",
+  match_2 = "Juhusliku arvamisega oleks see protsent 33.3%."
+)
+
+
 TACT_languages<-
-  data.frame(rbind(TACT_fi,TACT_en))
+  data.frame(rbind(TACT_fi,TACT_en,TACT_ge,TACT_es))
 
 

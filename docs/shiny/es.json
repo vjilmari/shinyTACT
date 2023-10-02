@@ -1,0 +1,9 @@
+{
+  "title": "Trisect ja risttabel (TACT) kaks muutujat",
+  "language": "Eesti",
+  "r_slider": "Korrelatsioon (r)",
+  "name_x": "Nimeta horisontaalne telg (X)",
+  "name_y": "Nimeta vertikaalne telg (Y)",
+  "font_prompt": "Fondi suurus",
+  "tact_paper_prompt": "Rohkem teavet Trisect ja Cross-Tabulate (TACT) meetodi kohta:"
+}
