@@ -1,0 +1,10 @@
+{
+  "title": "Yleistajuistettu korrelaatio kolmijaon ja ristiintaulukoinnin avulla",
+  "button_label": "Paina minua",
+  "language": "Suomi",
+  "r_slider": "Korrelaatio (r)",
+  "name_x": "Nimeä vaaka-akseli (X)",
+  "name_y": "Nimeä pystyakseli (Y)",
+  "font_prompt":"Fonttikoko",
+  "tact_paper_prompt":"Lisätietoa Trisect and Cross-Tabulate (TACT) -menetelmästä:"
+}

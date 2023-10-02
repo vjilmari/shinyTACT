@@ -1,0 +1,10 @@
+{
+  "title": "Trisect and Cross-Tabulate (TACT) two variables",
+  "button_label": "Push me",
+  "language": "English",
+  "r_slider": "Correlation (r)",
+  "name_x": "Name horizontal axis (X)",
+  "name_y": "Name vertical axis (Y)",
+  "font_prompt":"Font size",
+  "tact_paper_prompt":"More information about the Trisect and Cross-Tabulate (TACT) method:"
+}
