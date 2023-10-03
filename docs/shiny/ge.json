@@ -5,5 +5,6 @@
   "name_x": "Name der horizontalen Achse (X)",
   "name_y": "Name der vertikalen Achse (Y)",
   "font_prompt": "Schriftgröße",
+  "point_prompt":"Datapunktgröße",
   "tact_paper_prompt": "Weitere Informationen zur Trisect- und Cross-Tabulate-Methode (TACT):"
 }

@@ -5,5 +5,6 @@
   "name_x": "Nimeta horisontaalne telg (X)",
   "name_y": "Nimeta vertikaalne telg (Y)",
   "font_prompt": "Fondi suurus",
+  "point_prompt":"Andmepunkti suurus",
   "tact_paper_prompt": "Rohkem teavet Trisect ja Cross-Tabulate (TACT) meetodi kohta:"
 }

@@ -20,7 +20,8 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
                  plot.percents = c(TRUE,TRUE,TRUE,
                                    TRUE,TRUE,TRUE,
                                    TRUE,TRUE,TRUE),
-                language="fi")
+                language="fi",
+                Cex_multiplier = 1)
 
 {
   #r = -.25
@@ -150,7 +151,7 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
          ylim = c(min(yorig), max(yorig)), xlim = c(min(xorig), max(xorig)),
          xlab=Xlab, ylab=Ylab)
     points(x, y,
-           cex=Cex[color],
+           cex=Cex[color]*Cex_multiplier,
            col=Col[color],
            pch=Char[color]
     )
@@ -214,7 +215,7 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
       mtext(paste("Keskmiselt ",
                   round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
                   "% väärtustest kattuvad\nSeose täieliku puudumise korral kattuks 33.3%", sep=""),
-            side = 3, line=-2.2, adj=0.04, cex=1)
+            side = 3, line=-2.2, adj=0.04, cex=font_size)
 
   }
 
