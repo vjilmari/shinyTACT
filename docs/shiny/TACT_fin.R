@@ -205,17 +205,22 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
 
     mtext(paste(TACT_languages[TACT_languages$language==language,"correlation"],
                 " =", round(cr,2)), side = 1, line=-1.5, adj=0.04, cex=font_size)
-    if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language!="es")
-      mtext(paste(round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
-                  TACT_languages[TACT_languages$language==language,"match_1"],
-                  TACT_languages[TACT_languages$language==language,"match_2"],sep=""),
-            side = 3, line=-5.0, adj=0.04, cex=font_size)
     
-    if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language=="es")
-      mtext(paste("Keskmiselt ",
-                  round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
-                  "% väärtustest kattuvad\nSeose täieliku puudumise korral kattuks 33.3%", sep=""),
-            side = 3, line=-2.2, adj=0.04, cex=font_size)
+    if (r >=0){
+      if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language!="es")
+        mtext(paste(round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
+                    TACT_languages[TACT_languages$language==language,"match_1"],
+                    TACT_languages[TACT_languages$language==language,"match_2"],sep=""),
+              side = 3, line=-5.0, adj=0.04, cex=font_size)
+      
+      if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language=="es")
+        mtext(paste("Keskmiselt ",
+                    round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
+                    "% väärtustest kattuvad\nSeose täieliku puudumise korral kattuks 33.3%", sep=""),
+              side = 3, line=-2.2, adj=0.04, cex=font_size)
+      
+    }
+    
 
   }
 
