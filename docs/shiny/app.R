@@ -146,6 +146,10 @@ ui <- fluidPage(
                      label= "Simulation sample size", value = 1000000, min = 10, max = 1000000000),
         numericInput(inputId="n.plotted_advanced",
                      label= "Number of data points plotted", value = 1000, min = 1, max = 100000),
+        numericInput(inputId="cutoffsx1_advanced",
+                     label= "First cutoff", value = round(1/3,3), min = 1/10^8, max = 1-1/10^8),
+        numericInput(inputId="cutoffsx2_advanced",
+                     label= "Second cutoff", value = round(2/3,3), min = 1/10^8, max = 1-1/10^8),
         tags$p(textOutput("tact_info_text_advanced"), 
                tags$br(),
                tags$a("Mõttus, R. (2022). What Correlations Mean for Individual People: A Tutorial for Researchers, Students and the Public. Personality Science, 3, 1–27. https://doi.org/10.5964/ps.7467",
@@ -296,6 +300,8 @@ server <- function(input, output) {
                            Xlab = bquote(bold(.(x_label))),  # Bold face axis labels
                            Ylab = bquote(bold(.(y_label))),
                            n = input$n_advanced,n.plotted = input$n.plotted_advanced,
+                           cutoffsx=c(input$cutoffsx1_advanced,input$cutoffsx2_advanced),
+                           cutoffsy=c(input$cutoffsx1_advanced,input$cutoffsx2_advanced),
                            font_size = input$font_size_advanced,
                            Cex_multiplier = input$point_size_advanced,
                            language = selected_language())

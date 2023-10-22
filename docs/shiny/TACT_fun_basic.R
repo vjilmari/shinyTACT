@@ -30,8 +30,8 @@ TACT_fun_basic <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "u
   #n = 10^6
   #cutoffsx = c(1,2,3,4)/4
   #cutoffsy = c(1,2,3,4)/4
-  cutoffsx = c(1/3,2/3)
-  cutoffsy = c(1/3,2/3)
+  #cutoffsx = c(1/3,2/3)
+  #cutoffsy = c(1/3,2/3)
   #plot.percents = c(TRUE,TRUE,TRUE,TRUE,TRUE, TRUE,TRUE,TRUE,TRUE)
   #plot=TRUE
   #n.plotted = 10^3
