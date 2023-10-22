@@ -4,6 +4,9 @@ library(dplyr)
 
 source("TACT_fin.R")
 source("TACT_languages.R")
+#source("text_below_plot.R")
+
+
 
 # import languages
 translations <- list(
@@ -44,6 +47,11 @@ ui <- fluidPage(
       width: 100%;
       height: 100%;
     }
+    .text-below-plot {
+    background-color: white; /* Change this to your desired background color */
+    border: 1px solid #000; /* Add a 1px solid black border */
+    border-radius: 5px; /* Add rounded corners */
+  }
   ")),
   sidebarLayout(
     sidebarPanel(
@@ -61,7 +69,8 @@ ui <- fluidPage(
       class = "sidebar"
     ),
     mainPanel(
-      plotOutput("tactPlot")
+      plotOutput("tactPlot"),
+      uiOutput("text_below_plot")
     )
   )
 )
@@ -115,7 +124,43 @@ server <- function(input, output, session) {
                      font_size = input$font_size,
                      Cex_multiplier = input$point_size,
                      language=selected_language())
-    plot
+    plot$plot
+    
+    # Below the plot text 
+    output$text_below_plot <- renderUI({
+      if (input$r >= 0) {
+        bullet_points <- ""
+        
+        if (abs(diff(plot$cutoffsx)) > 0.001 & abs(diff(plot$cutoffsy)) > 0.001 & input$language != "es") {
+          bullet_points <- paste(
+            "<li>", 
+            round(sum(diag(t(apply(plot$crosstabs, 2, rev)))) / sum(plot$crosstabs) * 100, 1),
+                  TACT_languages[TACT_languages$language == input$language, "match_1"],
+                  "</li>",
+                  "<li>",
+                  TACT_languages[TACT_languages$language == input$language, "match_2"],
+                  "</li>",
+                  sep = ""
+            )
+        } else if (abs(diff(plot$cutoffsx)) > 0.001 & abs(diff(plot$cutoffsy)) > 0.001 & input$language == "es") {
+          bullet_points <- paste(
+            "<li>Keskmiselt ",
+            round(sum(diag(t(apply(plot$crosstabs, 2, rev)))) / sum(plot$crosstabs) * 100, 1),
+                  "% väärtustest kattuvad",
+                  "</li>",
+                  "<li>Seose täieliku puudumise korral kattuks 33.3%</li>",
+                  sep = ""
+            )
+        }
+        
+        # Create an unordered list with bullet points
+        HTML(paste0("<ul class='text-below-plot' style='font-size: ",
+                    input$font_size, "em;'>", bullet_points, "</ul>"))
+        
+      }
+    })
+    
+
   })
 }
 

@@ -113,6 +113,7 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
   # yorig[yorig < -4.5] = 4.5
   # yorig[yorig > 4.5] = 4.5
   if(plot){
+    #png("temp_plot.png")
     if(n > n.plotted){
       # draw a subsample from the original
       samp <- sample(n,n.plotted)
@@ -147,7 +148,7 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
     }
     
     
-    plot(x,y, col="white",xaxt="n", yaxt="n",
+    plot<-plot(x,y, col="white",xaxt="n", yaxt="n",
          ylim = c(min(yorig), max(yorig)), xlim = c(min(xorig), max(xorig)),
          xlab=Xlab, ylab=Ylab)
     points(x, y,
@@ -189,11 +190,14 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
                 ' (<', paste(round(cutoffsx[1]*100,1),'%)', sep="")),
           side=1, line=1, cex=font_size, adj=(xq1[1])/2.4, col="black")
     mtext(paste(TACT_languages[TACT_languages$language==language,"high"],
-                ' (>', paste(round(cutoffsx[2]*100,1),'%)', sep="")), side=1, line=1, cex=font_size, adj=(xq1[2] + 1)/1.75, col="black")
+                ' (>', paste(round(cutoffsx[2]*100,1),'%)', sep="")),
+          side=1, line=1, cex=font_size, adj=(xq1[2] + 1)/1.75, col="black")
     mtext(paste(TACT_languages[TACT_languages$language==language,"low"],
-                ' (<', paste(round(cutoffsy[1]*100,1),'%)', sep="")), side=2, line=1, cex=font_size, adj=(yq1[1])/2.4)
-    mtext(paste(TACT_languages[TACT_languages$language==language,"low"],
-                ' (>', paste(round(cutoffsy[2]*100,1),'%)', sep="")), side=2, line=1, cex=font_size, adj=(yq1[2] + 1)/1.75 )
+                ' (<', paste(round(cutoffsy[1]*100,1),'%)', sep="")),
+          side=2, line=1, cex=font_size, adj=(yq1[1])/2.4)
+    mtext(paste(TACT_languages[TACT_languages$language==language,"high"],
+                ' (>', paste(round(cutoffsy[2]*100,1),'%)', sep="")),
+          side=2, line=1, cex=font_size, adj=(yq1[2] + 1)/1.75 )
     
     
 
@@ -206,26 +210,40 @@ TACT_fin <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "uniform
     mtext(paste(TACT_languages[TACT_languages$language==language,"correlation"],
                 " =", round(cr,2)), side = 1, line=-1.5, adj=0.04, cex=font_size)
     
-    if (r >=0){
-      if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language!="es")
-        mtext(paste(round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
-                    TACT_languages[TACT_languages$language==language,"match_1"],
-                    TACT_languages[TACT_languages$language==language,"match_2"],sep=""),
-              side = 3, line=-5.0, adj=0.04, cex=font_size)
-      
-      if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language=="es")
-        mtext(paste("Keskmiselt ",
-                    round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
-                    "% väärtustest kattuvad\nSeose täieliku puudumise korral kattuks 33.3%", sep=""),
-              side = 3, line=-2.2, adj=0.04, cex=font_size)
-      
-    }
+    # comment the top text out completely
+    #if (r >=0){
+    #  if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language!="es")
+    #    mtext(paste(round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
+    #                TACT_languages[TACT_languages$language==language,"match_1"],
+    #                TACT_languages[TACT_languages$language==language,"match_2"],sep=""),
+    #          side = 3, line=-8.0, adj=0.04, cex=font_size)
+    #  
+    #  if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001 & language=="es")
+    #    mtext(paste("Keskmiselt ",
+    #                round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3)*100,
+    #                "% väärtustest kattuvad.\nSeose täieliku puudumise korral kattuks 33.3%", sep=""),
+    #          side = 3, line=-8.0, adj=0.04, cex=font_size)
+    #  
+    #}
+    
+    # Capture the plot
+    #captured_plot <- recordPlot()
+    # End the recording of the plot
+    #dev.off()
     
 
   }
 
-  if(abs(diff(cutoffsx)) < 0.001) crosstabs[,2] <- 0
-  if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001) cat("\n", "Overall accuracy in matching low, medium and high values:", round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3), "(against the random-guess baseline of .333)\n")
-  round(crosstabs,4)
+  #if(abs(diff(cutoffsx)) < 0.001) crosstabs[,2] <- 0
+  #if(abs(diff(cutoffsx)) > 0.001 & abs(diff(cutoffsy)) > 0.001) cat("\n", "Overall accuracy in matching low, medium and high values:", round(sum(diag(t(apply(crosstabs, 2, rev)))) / sum(crosstabs),3), "(against the random-guess baseline of .333)\n")
+  #round(crosstabs,4)
+  
+  results <- list(
+    crosstabs = crosstabs,
+    cutoffsx = cutoffsx,
+    cutoffsy = cutoffsy,
+    plot = plot
+  )
+  return(results)
 }
 
