@@ -73,7 +73,7 @@ ui <- fluidPage(
   ")),
     sidebarLayout(
       sidebarPanel(
-        width=5,
+        width=4,
         sliderInput("r_basic", textOutput("slider_label_basic"), min = -1, max = 1, value = 0, step = 0.01), 
         textInput("x_label_basic", textOutput("x_label_text_basic"), value = "X"), 
         textInput("y_label_basic", textOutput("y_label_text_basic"), value = "Y"), 
@@ -88,7 +88,8 @@ ui <- fluidPage(
         class = "sidebar_basic" 
       ),
       mainPanel(
-        width=7,
+        width=6,
+        style = "margin-top: -10px; padding-top: -10px;",
         plotOutput("tactPlot_basic"), 
         uiOutput("text_below_plot_basic") 
       )
@@ -135,7 +136,7 @@ ui <- fluidPage(
   ")),
     sidebarLayout(
       sidebarPanel(
-        width=5,
+        width=4,
         sliderInput("r_advanced", textOutput("slider_label_advanced"), min = -1, max = 1, value = 0, step = 0.01), 
         textInput("x_label_advanced", textOutput("x_label_text_advanced"), value = "X"), 
         textInput("y_label_advanced", textOutput("y_label_text_advanced"), value = "Y"), 
@@ -162,7 +163,8 @@ ui <- fluidPage(
         class = "sidebar_advanced" 
       ),
       mainPanel(
-        width=7,
+        width=6,
+        style = "margin-top: -10px; padding-top: -10px;",
         plotOutput("tactPlot_advanced"), 
         uiOutput("text_below_plot_advanced") 
       )
@@ -172,36 +174,36 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   # BASIC server
-  selected_language <- reactive({
+  selected_language_basic <- reactive({
     input$language_basic
   })
   
   output$title_panel_basic <- renderUI({
-    HTML(paste0("<h1>", translations[[selected_language()]]$title, "</h1>"))
+    HTML(paste0("<h1>", translations[[selected_language_basic()]]$title, "</h1>"))
   })
   
   output$slider_label_basic <- renderText({
-    translations[[selected_language()]]$r_slider
+    translations[[selected_language_basic()]]$r_slider
   })
   
   output$x_label_text_basic <- renderText({
-    translations[[selected_language()]]$name_x
+    translations[[selected_language_basic()]]$name_x
   })
   
   output$y_label_text_basic <- renderText({
-    translations[[selected_language()]]$name_y
+    translations[[selected_language_basic()]]$name_y
   })
   
   output$font_size_text_basic <- renderText({
-    translations[[selected_language()]]$font_prompt
+    translations[[selected_language_basic()]]$font_prompt
   })
   
   output$point_size_text_basic <- renderText({
-    translations[[selected_language()]]$point_prompt
+    translations[[selected_language_basic()]]$point_prompt
   })
   
   output$tact_info_text_basic <- renderText({
-    translations[[selected_language()]]$tact_paper_prompt
+    translations[[selected_language_basic()]]$tact_paper_prompt
   })
   
   output$tactPlot_basic <- renderPlot({
@@ -219,7 +221,7 @@ server <- function(input, output) {
                            Ylab = bquote(bold(.(y_label))),
                            font_size = input$font_size_basic,
                            Cex_multiplier = input$point_size_basic,
-                           language = selected_language())
+                           language = selected_language_basic())
     plot$plot
     
     # Below the plot text 
@@ -258,36 +260,36 @@ server <- function(input, output) {
   
   
   # ADVANCED server
-  selected_language <- reactive({
+  selected_language_advanced <- reactive({
     input$language_advanced
   })
   
   output$title_panel_advanced <- renderUI({
-    HTML(paste0("<h1>", translations[[selected_language()]]$title, "</h1>"))
+    HTML(paste0("<h1>", translations[[selected_language_advanced()]]$title, "</h1>"))
   })
   
   output$slider_label_advanced <- renderText({
-    translations[[selected_language()]]$r_slider
+    translations[[selected_language_advanced()]]$r_slider
   })
   
   output$x_label_text_advanced <- renderText({
-    translations[[selected_language()]]$name_x
+    translations[[selected_language_advanced()]]$name_x
   })
   
   output$y_label_text_advanced <- renderText({
-    translations[[selected_language()]]$name_y
+    translations[[selected_language_advanced()]]$name_y
   })
   
   output$font_size_text_advanced <- renderText({
-    translations[[selected_language()]]$font_prompt
+    translations[[selected_language_advanced()]]$font_prompt
   })
   
   output$point_size_text_advanced <- renderText({
-    translations[[selected_language()]]$point_prompt
+    translations[[selected_language_advanced()]]$point_prompt
   })
   
   output$tact_info_text_advanced <- renderText({
-    translations[[selected_language()]]$tact_paper_prompt
+    translations[[selected_language_advanced()]]$tact_paper_prompt
   })
   
   output$tactPlot_advanced <- renderPlot({
@@ -308,7 +310,7 @@ server <- function(input, output) {
                            cutoffsy=c(input$cutoffsx1_advanced,input$cutoffsx2_advanced),
                            font_size = input$font_size_advanced,
                            Cex_multiplier = input$point_size_advanced,
-                           language = selected_language())
+                           language = selected_language_advanced())
     plot$plot
     
     # Below the plot text 
