@@ -97,7 +97,7 @@ ui <- fluidPage(
   ")),
     sidebarLayout(
       sidebarPanel(
-        width=3,
+        width=4,
         sliderInput("r_basic", textOutput("slider_label_basic"), min = -1, max = 1, value = 0, step = 0.01), 
         textInput("x_label_basic", textOutput("x_label_text_basic"), value = "X"), 
         textInput("y_label_basic", textOutput("y_label_text_basic"), value = "Y"), 
@@ -160,7 +160,7 @@ ui <- fluidPage(
   ")),
     sidebarLayout(
       sidebarPanel(
-        width=3,
+        width=4,
         sliderInput("r_advanced", textOutput("slider_label_advanced"), min = -1, max = 1, value = 0, step = 0.01), 
         textInput("x_label_advanced", textOutput("x_label_text_advanced"), value = "X"), 
         textInput("y_label_advanced", textOutput("y_label_text_advanced"), value = "Y"), 
