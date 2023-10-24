@@ -6,5 +6,10 @@
   "name_y": "Name vertical axis (Y)",
   "font_prompt":"Font size",
   "point_prompt":"Datapoint size",
-  "tact_paper_prompt":"More information about the Trisect and Cross-Tabulate (TACT) method:"
+  "tact_paper_prompt":"More information about the Trisect and Cross-Tabulate (TACT) method:",
+  "distribution_prompt": "Variable distribution",
+  "n_prompt": "Simulation sample size",
+  "plotted.n_prompt": "Number of data points plotted",
+  "cut1_prompt": "First cutoff",
+  "cut2_prompt": "Second cutoff"
 }

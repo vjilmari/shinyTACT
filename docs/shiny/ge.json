@@ -6,5 +6,10 @@
   "name_y": "Name der vertikalen Achse (Y)",
   "font_prompt": "Schriftgröße",
   "point_prompt":"Datapunktgröße",
-  "tact_paper_prompt": "Weitere Informationen zur Trisect- und Cross-Tabulate-Methode (TACT):"
+  "tact_paper_prompt": "Weitere Informationen zur Trisect- und Cross-Tabulate-Methode (TACT):",
+  "distribution_prompt": "Verteilung der Variablen",
+  "n_prompt": "Stichprobengröße der Simulation",
+  "plotted.n_prompt": "Anzahl der Datenpunkte in der Grafik",
+  "cut1_prompt": "Erster Schwellenwert",
+  "cut2_prompt": "Zweiter Schwellenwert"
 }

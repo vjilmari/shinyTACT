@@ -6,5 +6,10 @@
   "name_y": "Nimeä pystyakseli (Y)",
   "font_prompt":"Fonttikoko",
   "point_prompt":"Datapisteen koko",
-  "tact_paper_prompt":"Lisätietoa Trisect and Cross-Tabulate (TACT) -menetelmästä:"
+  "tact_paper_prompt":"Lisätietoa Trisect and Cross-Tabulate (TACT) -menetelmästä:",
+  "distribution_prompt": "Muuttujien jakauma",
+  "n_prompt": "Simulaation otoskoko",
+  "plotted.n_prompt": "Datapisteiden määrä kuvassa",
+  "cut1_prompt": "Ensimmäinen leikkauspiste",
+  "cut2_prompt": "Toinen leikkauspiste"
 }

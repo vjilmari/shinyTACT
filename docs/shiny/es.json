@@ -6,5 +6,10 @@
   "name_y": "Nimeta vertikaalne telg (Y)",
   "font_prompt": "Fondi suurus",
   "point_prompt":"Andmepunkti suurus",
-  "tact_paper_prompt": "Rohkem teavet Trisect ja Cross-Tabulate (TACT) meetodi kohta:"
+  "tact_paper_prompt": "Meetodi kohta vaata lähemalt:",
+  "distribution_prompt": "Muutujate jaotus",
+  "n_prompt": "Simulatsioonivalimi suurus",
+  "plotted.n_prompt": "Andmepunktide arv joonisel",
+  "cut1_prompt": "Esimene lõikekoht",
+  "cut2_prompt": "Teine lõikekoht"
 }

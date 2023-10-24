@@ -166,18 +166,28 @@ ui <- fluidPage(
         textInput("y_label_advanced", textOutput("y_label_text_advanced"), value = "Y"), 
         sliderInput("font_size_advanced", textOutput("font_size_text_advanced"), min = 0.1, max = 3, value = 1, step = 0.1), 
         sliderInput("point_size_advanced", textOutput("point_size_text_advanced"), min = 0.1, max = 3, value = 1, step = 0.1), 
-        selectInput("distribution_advanced", "Variable Distribution",
+        selectInput("distribution_advanced",
+                    textOutput("distribution_text_advanced"),
+                    #"Variable Distribution",
                     choices = c("normal", "uniform", "skewed"),
                     selected = "normal"
         ),
         numericInput(inputId="n_advanced",
-                     label= "Simulation sample size", value = 1000000, min = 10, max = 1000000000),
+                     textOutput("n_text_advanced"),
+                     #label= "Simulation sample size",
+                     value = 1000000, min = 10, max = 1000000000),
         numericInput(inputId="n.plotted_advanced",
-                     label= "Number of data points plotted", value = 1000, min = 1, max = 100000),
+                     textOutput("n.plotted_text_advanced"),
+                     #label= "Number of data points plotted",
+                     value = 1000, min = 1, max = 100000),
         numericInput(inputId="cutoffsx1_advanced",
-                     label= "First cutoff", value = round(1/3,3), min = 1/10^8, max = 1-1/10^8),
+                     textOutput("cut1_text_advanced"),
+                     #label= "First cutoff",
+                     value = round(1/3,3), min = 1/10^8, max = 1-1/10^8),
         numericInput(inputId="cutoffsx2_advanced",
-                     label= "Second cutoff", value = round(2/3,3), min = 1/10^8, max = 1-1/10^8),
+                     textOutput("cut2_text_advanced"),
+                     #label= "Second cutoff",
+                     value = round(2/3,3), min = 1/10^8, max = 1-1/10^8),
         tags$p(textOutput("tact_info_text_advanced"), 
                tags$br(),
                tags$a("Mõttus, R. (2022). What Correlations Mean for Individual People: A Tutorial for Researchers, Students and the Public. Personality Science, 3, 1–27. https://doi.org/10.5964/ps.7467",
@@ -311,6 +321,26 @@ server <- function(input, output) {
   
   output$point_size_text_advanced <- renderText({
     translations[[selected_language_advanced()]]$point_prompt
+  })
+  
+  output$distribution_text_advanced <- renderText({
+    translations[[selected_language_advanced()]]$distribution_prompt
+  })
+  
+  output$n_text_advanced <- renderText({
+    translations[[selected_language_advanced()]]$n_prompt
+  })
+  
+  output$n.plotted_text_advanced <- renderText({
+    translations[[selected_language_advanced()]]$plotted.n_prompt
+  })
+  
+  output$cut1_text_advanced <- renderText({
+    translations[[selected_language_advanced()]]$cut1_prompt
+  })
+  
+  output$cut2_text_advanced <- renderText({
+    translations[[selected_language_advanced()]]$cut2_prompt
   })
   
   output$tact_info_text_advanced <- renderText({
