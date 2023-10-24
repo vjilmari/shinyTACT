@@ -18,33 +18,57 @@ translations <- list(
 ui <- fluidPage(
   useShinyjs(),  # Initialize shinyjs
   
-  # Add custom CSS to style the radio button options
-  tags$style(HTML("
-    .radio-btn-inline {
-      display: inline-block;
-      margin-right: 10px;
-    }
-  ")),
-  
-  div(id = "radioButtons",
-      radioButtons("mode_choice", "Mode",
-                   c("Basic", "Advanced"),
-                   inline = TRUE  # Display the radio buttons inline
+  div(
+    style = "display: flex; align-items: baseline; justify-content: space-between; margin-bottom: -30px; padding: -30px;",
+    radioButtons("mode_choice", "Mode",
+                 c("Basic", "Advanced"),
+                 inline = TRUE
+    ),
+    div(
+      style = "flex-grow: 1;",  # Empty space to push to the right
+    ),
+    conditionalPanel(
+      condition = 'input.mode_choice == "Basic"',
+      selectInput("language_basic", "Language",
+                  choices = c(
+                    "Suomi" = "fi",
+                    "English" = "en",
+                    "Deutsch" = "ge",
+                    "Eesti keel" = "es"
+                  ),
+                  selected = "fi"
       )
-  ),
+    ),
+    conditionalPanel(
+      condition = 'input.mode_choice == "Advanced"',
+      selectInput("language_advanced", "Language",
+                  choices = c(
+                    "Suomi" = "fi",
+                    "English" = "en",
+                    "Deutsch" = "ge",
+                    "Eesti keel" = "es"
+                  ),
+                  selected = "fi"
+      )
+    ),
+    div(
+      style = "flex-grow: 1;",  # Empty space to push to the right
+    ),
+  )
+  ,
   
   # PANEL FOR BASIC MODE
   conditionalPanel(
     condition = 'input.mode_choice == "Basic"',
-    selectInput("language_basic", "Language:",
-                choices = c(
-                  "Suomi" = "fi",
-                  "English" = "en",
-                  "Deutsch" = "ge",
-                  "Eesti keel" = "es"
-                ),
-                selected = "fi"
-    ),
+    #selectInput("language_basic", "Language:",
+    #            choices = c(
+    #              "Suomi" = "fi",
+    #              "English" = "en",
+    #              "Deutsch" = "ge",
+    #              "Eesti keel" = "es"
+    #            ),
+    #            selected = "fi"
+    #),
     uiOutput("title_panel_basic"),
     tags$style(HTML("
     .sidebar_basic { 
@@ -73,7 +97,7 @@ ui <- fluidPage(
   ")),
     sidebarLayout(
       sidebarPanel(
-        width=4,
+        width=3,
         sliderInput("r_basic", textOutput("slider_label_basic"), min = -1, max = 1, value = 0, step = 0.01), 
         textInput("x_label_basic", textOutput("x_label_text_basic"), value = "X"), 
         textInput("y_label_basic", textOutput("y_label_text_basic"), value = "Y"), 
@@ -89,7 +113,7 @@ ui <- fluidPage(
       ),
       mainPanel(
         width=6,
-        style = "margin-top: -10px; padding-top: -10px;",
+        style = "margin-top: 0px; padding-top: -1000px;",
         plotOutput("tactPlot_basic"), 
         uiOutput("text_below_plot_basic") 
       )
@@ -99,15 +123,15 @@ ui <- fluidPage(
   # ADVANCED PANEL MODEL
   conditionalPanel(
     condition = 'input.mode_choice == "Advanced"',
-    selectInput("language_advanced", "Language:",
-                choices = c(
-                  "Suomi" = "fi",
-                  "English" = "en",
-                  "Deutsch" = "ge",
-                  "Eesti keel" = "es"
-                ),
-                selected = "fi"
-    ),
+    #selectInput("language_advanced", "Language:",
+    #            choices = c(
+    #              "Suomi" = "fi",
+    #              "English" = "en",
+    #              "Deutsch" = "ge",
+    #              "Eesti keel" = "es"
+    #            ),
+    #            selected = "fi"
+    #),
     uiOutput("title_panel_advanced"),
     tags$style(HTML("
     .sidebar_advanced { 
@@ -136,7 +160,7 @@ ui <- fluidPage(
   ")),
     sidebarLayout(
       sidebarPanel(
-        width=4,
+        width=3,
         sliderInput("r_advanced", textOutput("slider_label_advanced"), min = -1, max = 1, value = 0, step = 0.01), 
         textInput("x_label_advanced", textOutput("x_label_text_advanced"), value = "X"), 
         textInput("y_label_advanced", textOutput("y_label_text_advanced"), value = "Y"), 
@@ -164,7 +188,7 @@ ui <- fluidPage(
       ),
       mainPanel(
         width=6,
-        style = "margin-top: -10px; padding-top: -10px;",
+        style = "margin-top: 0px; padding-top: -1000px;",
         plotOutput("tactPlot_advanced"), 
         uiOutput("text_below_plot_advanced") 
       )
@@ -213,7 +237,7 @@ server <- function(input, output) {
     
     # Set font size
     par(cex.lab = input$font_size_basic, cex.axis = input$font_size_basic, cex.main = input$font_size_basic,
-        mar = c(5, 5, 4, 2) + 0.1)
+        mar = c(5, 5, 1, 0) + 0.1)
     
     # Call TACT_fun_basic function with 
     plot <- TACT_fun_basic(r = input$r_basic, distribution = "normal",
@@ -222,6 +246,7 @@ server <- function(input, output) {
                            font_size = input$font_size_basic,
                            Cex_multiplier = input$point_size_basic,
                            language = selected_language_basic())
+    
     plot$plot
     
     # Below the plot text 
@@ -299,7 +324,7 @@ server <- function(input, output) {
     
     # Set font size
     par(cex.lab = input$font_size_advanced, cex.axis = input$font_size_advanced, cex.main = input$font_size_advanced,
-        mar = c(5, 5, 4, 2) + 0.1)
+        mar = c(5, 5, 1, 0) + 0.1)
     
     # Call TACT_fun_advanced function with 
     plot <- TACT_fun_basic(r = input$r_advanced, distribution = input$distribution_advanced,

@@ -189,7 +189,7 @@ TACT_fun_basic <- function(r=NULL, x=NULL, y=NULL, distribution = c("normal", "u
     xq1 <- quantile(xstand, cutoffsx)
     ystand <- (yorig-min(yorig))/(max(yorig)-min(yorig))
     yq1 <- quantile(ystand, cutoffsy)
-    mtext(Main, side=3, line=2, adj=0)
+    #mtext(Main, side=3, line=2, adj=0)
     mtext(paste(TACT_languages[TACT_languages$language==language,"low"],
                 ' (<', paste(round(cutoffsx[1]*100,1),'%)', sep="")),
           side=1, line=1, cex=font_size, adj=(xq1[1])/2.4, col="black")
